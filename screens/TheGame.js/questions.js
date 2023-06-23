@@ -127,6 +127,21 @@ const questions = [
     ],
     correctAnswer: 0,
   },
+  {
+    question: 'How many Scientist is there on the Large Oil Rig?',
+    answers: ['23', '30', '26', '27'],
+    correctAnswer: 0,
+  },
+  {
+    question: 'How many Scientist is there on the Large Oil Rig?',
+    answers: ['23', '30', '26', '27'],
+    correctAnswer: 0,
+  },
+  {
+    question: 'How many Scientist is there on the Large Oil Rig?',
+    answers: ['23', '30', '26', '27'],
+    correctAnswer: 0,
+  },
   // Add more questions here
 ];
 
