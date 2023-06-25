@@ -53,18 +53,6 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: 200,
   },
-  buttons: {
-    marginBottom: 20,
-    flexDirection: 'column',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // cursor: 'pointer',
-    // transition: 'all 0.3s ease-in-out',
-  },
-  loginPage: {
-    flex: 1,
-  },
   error: {
     borderColor: 'red',
     borderWidth: 1,

@@ -2,12 +2,16 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import questions from './questions';
 import Table from './table';
+import {tableMock} from './TableMock';
 
 const TheGameScreen = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-
   const [gameOver, setGameOver] = useState(false);
+
+  const handleTryAgain = () => {
+    setGameOver(false);
+  };
 
   const handleAnswer = answerIndex => {
     if (selectedAnswer !== null || gameOver) {
@@ -27,7 +31,7 @@ const TheGameScreen = () => {
         setTimeout(() => {
           setCurrentQuestion(currentQuestion + 1);
           setSelectedAnswer(null);
-        }, 2000); // Delay of 2 seconds (2000 milliseconds)
+        }, 1000); // Delay of 1 seconds (1000 milliseconds)
       }
     } else {
       // Wrong answer selected
@@ -95,9 +99,17 @@ const TheGameScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Table dataId={currentQuestion} />
+      {!gameOver && (
+        <Table data={tableMock} questionNumbers={currentQuestion} />
+      )}
+
       {gameOver ? (
-        <Text style={styles.gameOverText}>Game Over</Text>
+        <View style={styles.gameOver}>
+          <Text style={styles.gameOverText}>Game Over</Text>
+          <TouchableOpacity style={styles.tryAgainBtn} onPress={handleTryAgain}>
+            <Text style={styles.tryAgain}>Try Again</Text>
+          </TouchableOpacity>
+        </View>
       ) : (
         <>
           <Text style={styles.question}>
@@ -113,12 +125,14 @@ const TheGameScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    padding: 20,
+    backgroundColor: 'grey',
   },
   question: {
     fontSize: 18,
     marginBottom: 20,
+    alignSelf: 'center',
   },
   answerRow: {
     flexDirection: 'row',
@@ -126,7 +140,7 @@ const styles = StyleSheet.create({
   },
   answerButton: {
     flex: 1,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: 'coral',
     borderRadius: 8,
     padding: 10,
     marginHorizontal: 5,
@@ -134,6 +148,8 @@ const styles = StyleSheet.create({
   answerText: {
     fontSize: 16,
     textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
   },
   selectedAnswer: {
     backgroundColor: '#b3e6b3',
@@ -147,6 +163,25 @@ const styles = StyleSheet.create({
   gameOverText: {
     fontSize: 24,
     fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  gameOver: {
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  tryAgainBtn: {
+    backgroundColor: 'coral',
+    alignItems: 'center',
+    padding: 12,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#fff',
+    marginTop: 20,
+  },
+  tryAgain: {
+    color: 'white',
+    fontSize: 18,
   },
 });
 

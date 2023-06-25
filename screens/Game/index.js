@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../../styles/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const GameScreen = () => {
   const navigation = useNavigation();
@@ -25,7 +26,7 @@ const GameScreen = () => {
       </Text>
       <View style={{alignItems: 'flex-start'}}>
         <Text style={{fontWeight: 'bold', marginTop: 20}}>
-          The rules of the game:
+          The rules of the game :
         </Text>
         <Text style={{fontWeight: 'bold', marginTop: 20}}>
           There are 15 questions on 1 000 000 scraps.
@@ -46,8 +47,10 @@ const GameScreen = () => {
           3: Call team partners !
         </Text>
       </View>
-      <View style={styles.buttons}>
-        <Button title="Start" onPress={handlerTheGame} />
+      <Icon name={'menu'} size={36} color={'#000'} />
+      <Icon name={'male'} size={56} />
+      <View>
+        <Button color={'coral'} title="Start" onPress={handlerTheGame} />
       </View>
     </View>
   );
