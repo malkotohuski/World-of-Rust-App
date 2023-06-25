@@ -1,4 +1,4 @@
-const tableMock = [
+export const tableMock = [
   {
     id: 0,
     amount: '100',
@@ -10,7 +10,7 @@ const tableMock = [
     questionNumbers: 2,
   },
   {
-    id: 3,
+    id: 2,
     amount: '500',
     questionNumbers: 3,
   },
