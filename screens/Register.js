@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {NavigationContext} from '@react-navigation/native';
 import styles from '../styles/styles';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default function Register() {
   const navigation = useContext(NavigationContext);
@@ -71,61 +72,80 @@ export default function Register() {
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-        console.log('Dismissed keyboard');
-      }}>
-      <View style={styles.loginPage}>
-        <Text style={styles.loginBar}></Text>
-        <TextInput
-          style={[styles.nameBar, nameError && styles.error]}
-          placeholder="Username"
-          value={name}
-          onChangeText={text => setName(text)}
-        />
+    <View style={{backgroundColor: 'grey', flex: 1, padding: 20}}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+          console.log('Dismissed keyboard');
+        }}>
+        <View style={{justifyContent: 'space-between', flex: 1}}>
+          <View>
+            <Text style={styles.loginBar}></Text>
+            <TextInput
+              style={[styles.nameBar, nameError && styles.error]}
+              placeholder="Username"
+              value={name}
+              onChangeText={text => setName(text)}
+            />
 
-        <TextInput
-          style={[styles.emailBar, emailError && styles.error]}
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-        />
-        {emailError && <Text></Text>}
+            <TextInput
+              style={[styles.emailBar, emailError && styles.error]}
+              placeholder="Email"
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
+            {emailError && <Text></Text>}
 
-        <TextInput
-          style={[styles.passwordBar, passwordError && styles.error]}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={text => setPassword(text)}
-        />
-        {passwordError && <Text></Text>}
+            <TextInput
+              style={[styles.passwordBar, passwordError && styles.error]}
+              placeholder="Password"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={text => setPassword(text)}
+            />
+            {passwordError && <Text></Text>}
 
-        <TextInput
-          style={[styles.configBar, configPasswordError && styles.error]}
-          placeholder="ConfigPassword"
-          secureTextEntry={true}
-          value={configPassword}
-          onChangeText={text => setConfigPassword(text)}
-        />
-        {configPasswordError && <Text></Text>}
-        {passwordMatchError && (
-          <Text style={styles.errorText}>Passwords do not match</Text>
-        )}
-
-        <View style={styles.buttons}>
-          <Button
-            style={styles.submitBtn}
-            title="Submit"
-            onPress={handleSubmit}
-          />
-          <Text style={{alignSelf: 'center', justifyContent: 'center'}}>
-            I have an account
-          </Text>
-          <Button style={styles.loginBtn} title="Login" onPress={handleLogin} />
+            <TextInput
+              style={[styles.configBar, configPasswordError && styles.error]}
+              placeholder="ConfigPassword"
+              secureTextEntry={true}
+              value={configPassword}
+              onChangeText={text => setConfigPassword(text)}
+            />
+            {configPasswordError && <Text></Text>}
+            {passwordMatchError && (
+              <Text style={styles.errorText}>Passwords do not match</Text>
+            )}
+          </View>
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'coral',
+                alignItems: 'center',
+                padding: 12,
+                borderRadius: 20,
+                borderWidth: 1,
+                borderColor: '#fff',
+              }}
+              onPress={handleSubmit}>
+              <Text style={{color: 'white', fontSize: 18}}>Submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'coral',
+                alignItems: 'center',
+                padding: 12,
+                borderRadius: 20,
+                borderWidth: 1,
+                borderColor: '#fff',
+                marginTop: 20,
+              }}
+              onPress={handleLogin}>
+              <Text style={{color: 'white', fontSize: 18}}>I have account</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </View>
   );
 }
