@@ -19,7 +19,7 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView style={{backgroundColor: '#fff'}} {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Help" onPress={() => alert('Link to help')} />
+      {/* <DrawerItem label="Help" onPress={() => alert('Link to help')} /> */}
     </DrawerContentScrollView>
   );
 }

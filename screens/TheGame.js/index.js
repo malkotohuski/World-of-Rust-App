@@ -124,6 +124,7 @@ const TheGameScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'grey',
     flex: 1,
     alignItems: 'flex-end',
     padding: 20,
