@@ -1,17 +1,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-} from '@react-navigation/drawer';
-import Login from './screens/Login';
-import Register from './screens/Register';
-import HomeScreen from './screens/Home';
-import GameScreen from './screens/Game';
-import TheGameScreen from './screens/TheGame.js';
+import Login from '../Login';
+import Register from '../Register';
+import HomeScreen from '../Home';
+import GameScreen from '../Game';
+import TheGameScreen from '../TheGame.js';
 import {DrawerContent} from './screens/DrawerContent/drawerContent';
-// import {Navigator} from './screens/MainTabScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -24,11 +18,11 @@ function CustomDrawerContent(props) {
   );
 }
 
-function App() {
+export const Navigator = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-        {/* screenOptions=
+        screenOptions=
         {{
           drawerActiveBackgroundColor: 'coral',
           drawerInactiveTintColor: 'coral',
@@ -41,7 +35,7 @@ function App() {
             paddingVertical: 12,
           },
         }}
-        drawerContents={props => <CustomDrawerContent {...props} />} */}
+        drawerContents={props => <CustomDrawerContent {...props} />}
         <Drawer.Screen
           name="Home"
           component={HomeScreen}
@@ -100,6 +94,4 @@ function App() {
       </Drawer.Navigator>
     </NavigationContainer>
   );
-}
-
-export default App;
+};

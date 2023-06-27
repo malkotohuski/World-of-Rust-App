@@ -9,16 +9,33 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import styles from '../styles/styles';
-import Icon from 'react-native-vector-icons/Ionicons';
+import styles from '../../styles/styles';
 
 export default function Login() {
   const navigation = useNavigation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
   const handleLogin = () => {
-    navigation.navigate('Login');
+    if (!email) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+
+    if (!password) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+
+    navigation.navigate('Game');
+
+    console.log('Submitted');
   };
 
   const handleRegistration = () => {
@@ -45,6 +62,7 @@ export default function Login() {
               value={email}
               onChangeText={text => setEmail(text)}
             />
+            {emailError && <Text></Text>}
             <TextInput
               style={styles.passwordBar}
               placeholder="Password"
@@ -52,6 +70,7 @@ export default function Login() {
               value={password}
               onChangeText={text => setPassword(text)}
             />
+            {passwordError && <Text></Text>}
           </View>
           <View style={styles.buttons}>
             <TouchableOpacity
@@ -78,7 +97,7 @@ export default function Login() {
               }}
               onPress={handleRegistration}>
               <Text style={{color: 'white', fontSize: 18}}>
-                I dont have an account
+                I don t have an account
               </Text>
             </TouchableOpacity>
             {/* <Text
@@ -89,7 +108,7 @@ export default function Login() {
                 marginTop: 20,
                 fontSize: 20,
               }}>
-              I dont have an account
+              I don t have an account
             </Text> */}
           </View>
         </View>
