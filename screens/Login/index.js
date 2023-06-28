@@ -33,8 +33,14 @@ export default function Login() {
       setPasswordError(false);
     }
 
+    if (email && password) {
+      // Logic for successful login
+      console.log('Submitted');
+    } else {
+      // Logic for unsuccessful login
+      console.log('Wrong user or password');
+    }
     navigation.navigate('Game');
-
     console.log('Submitted');
   };
 
@@ -48,6 +54,7 @@ export default function Login() {
 
   return (
     <View style={{backgroundColor: 'grey', flex: 1, padding: 20}}>
+      <Text style={styles.welcomeText}>Sing In</Text>
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss();
@@ -100,16 +107,6 @@ export default function Login() {
                 I don t have an account
               </Text>
             </TouchableOpacity>
-            {/* <Text
-              style={{
-                textAlign: 'center',
-                justifyContent: 'center',
-                color: '#fff',
-                marginTop: 20,
-                fontSize: 20,
-              }}>
-              I don t have an account
-            </Text> */}
           </View>
         </View>
       </TouchableWithoutFeedback>

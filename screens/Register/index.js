@@ -8,7 +8,7 @@ import {
   Keyboard,
 } from 'react-native';
 import {NavigationContext} from '@react-navigation/native';
-import styles from '../styles/styles';
+import styles from '../../styles/styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default function Register() {
@@ -73,6 +73,7 @@ export default function Register() {
 
   return (
     <View style={{backgroundColor: 'grey', flex: 1, padding: 20}}>
+      <Text style={styles.welcomeText}>Sing Up</Text>
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss();

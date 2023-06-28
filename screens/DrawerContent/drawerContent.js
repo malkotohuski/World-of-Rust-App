@@ -11,7 +11,7 @@ import {
   Switch,
 } from 'react-native-paper';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export function DrawerContent(props) {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -19,9 +19,11 @@ export function DrawerContent(props) {
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
+  // Define the styles for light and dark themes
+  const styles = isDarkTheme ? darkStyles : lightStyles;
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.viewDrawer}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
@@ -34,7 +36,7 @@ export function DrawerContent(props) {
               />
               <View style={{marginLeft: 15, flexDirection: 'column'}}>
                 <Title style={styles.title}>Little Husky</Title>
-                <Caption style={styles.caption}>@malkotohuski</Caption>
+                <Caption style={styles.caption}>malkotohuski@gmail.com</Caption>
               </View>
             </View>
           </View>
@@ -42,34 +44,25 @@ export function DrawerContent(props) {
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="home-outline" color={color} size={size} />
+                <Icon name="person" color={color} size={size} />
               )}
-              label="Home"
-              onPress={() => {
-                props.navigation.navigate('Home');
-              }}
-            />
-            <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="login" color={color} size={size} />
-              )}
-              label="Login"
+              label="My Account"
               onPress={() => {
                 props.navigation.navigate('Login');
               }}
             />
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="login-variant" color={color} size={size} />
+                <Icon name="leaderboard" color={color} size={size} />
               )}
-              label="Registered"
+              label="Leader Board"
               onPress={() => {
                 props.navigation.navigate('Register');
               }}
             />
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="gamepad-outline" color={color} size={size} />
+                <Icon name="videogame-asset" color={color} size={size} />
               )}
               label="The Game"
               onPress={() => {
@@ -78,14 +71,14 @@ export function DrawerContent(props) {
             />
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="contacts" color={color} size={size} />
+                <Icon name="contact-support" color={color} size={size} />
               )}
               label="Contacts-us"
               onPress={() => {}}
             />
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="cellphone-settings" color={color} size={size} />
+                <Icon name="settings" color={color} size={size} />
               )}
               label="Settings"
               onPress={() => {}}
@@ -119,21 +112,77 @@ export function DrawerContent(props) {
   );
 }
 
-const styles = StyleSheet.create({
+const lightStyles = StyleSheet.create({
+  // Light theme styles
+  viewDrawer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   drawerContent: {
     flex: 1,
-  },
-  userInfoSection: {
-    paddingLeft: 20,
+    backgroundColor: 'white', // Change to the desired light background color
   },
   title: {
     fontSize: 16,
     marginTop: 3,
     fontWeight: 'bold',
+    color: 'black', // Change to the desired light text color
   },
   caption: {
     fontSize: 14,
     lineHeight: 14,
+    color: 'black', // Change to the desired light text color
+  },
+  row: {
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  paragraph: {
+    fontWeight: 'bold',
+    marginRight: 3,
+  },
+  drawerSection: {
+    marginTop: 15,
+  },
+  bottomDrawerSection: {
+    marginBottom: 15,
+    borderTopColor: '#f4f4f4',
+    borderTopWidth: 1,
+  },
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+});
+
+const darkStyles = StyleSheet.create({
+  // Dark theme styles
+  viewDrawer: {
+    flex: 1,
+    backgroundColor: '#999',
+  },
+  drawerContent: {
+    flex: 1,
+    backgroundColor: '#999', // Change to the desired dark background color
+  },
+  title: {
+    fontSize: 16,
+    marginTop: 3,
+    fontWeight: 'bold',
+    color: 'white', // Change to the desired dark text color
+  },
+  caption: {
+    fontSize: 14,
+    lineHeight: 14,
+    color: 'white', // Change to the desired dark text color
   },
   row: {
     marginTop: 20,
