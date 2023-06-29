@@ -29,7 +29,7 @@ const TabNavigation = () => {
           tabBarIcon: ({focused}) => (
             <TouchableOpacity
               style={{alignItems: 'center', justifyContent: 'center'}}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => navigation.navigate('Can you survive !')}>
               <Icon
                 name="home"
                 size={30}
