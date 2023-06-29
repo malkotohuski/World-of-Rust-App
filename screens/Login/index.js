@@ -40,7 +40,7 @@ export default function Login() {
       // Logic for unsuccessful login
       console.log('Wrong user or password');
     }
-    navigation.navigate('Game');
+    navigation.navigate('Tabs');
     console.log('Submitted');
   };
 
