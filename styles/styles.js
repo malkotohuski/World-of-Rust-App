@@ -64,4 +64,28 @@ export default StyleSheet.create({
     borderColor: 'red',
     borderWidth: 2,
   },
+  FindStyles: {
+    flex: 1,
+    alignItem: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#8fcbbc',
+  },
+  postStyle: {
+    flex: 1,
+    alignItem: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#8fcbbc',
+  },
+  SettingsStyles: {
+    flex: 1,
+    alignItem: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#8fcbbc',
+  },
+  chatStyles: {
+    flex: 1,
+    alignItem: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#8fcbbc',
+  },
 });
