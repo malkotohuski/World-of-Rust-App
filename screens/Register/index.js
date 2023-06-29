@@ -64,7 +64,7 @@ export default function Register() {
         setPasswordMatchError(true);
       } else {
         setPasswordMatchError(false);
-        navigation.navigate('Game', {userName: name});
+        navigation.navigate('Tabs', {userName: name});
 
         console.log('Submitted');
       }

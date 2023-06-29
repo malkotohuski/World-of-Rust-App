@@ -23,7 +23,7 @@ const TabNavigation = () => {
         },
       }}>
       <Tab.Screen
-        name="Home"
+        name="Can you survive !"
         component={HomeScreen}
         options={{
           tabBarIcon: ({focused}) => (
@@ -94,8 +94,54 @@ const TabNavigation = () => {
           ),
         }}
       />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-      <Tab.Screen name="Chat" component={ChatScreen} />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <TouchableOpacity
+              style={{alignItems: 'center', justifyContent: 'center'}}
+              onPress={() => navigation.navigate('Settings')}>
+              <Icon
+                name="settings"
+                size={30}
+                color={focused ? '#e32f45' : '#748c94'}
+              />
+              <Text
+                style={{
+                  color: focused ? '#000' : '#748c94',
+                  fontSize: 16,
+                }}>
+                Settings
+              </Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <TouchableOpacity
+              style={{alignItems: 'center', justifyContent: 'center'}}
+              onPress={() => navigation.navigate('Chat')}>
+              <Icon
+                name="chat"
+                size={30}
+                color={focused ? '#e32f45' : '#748c94'}
+              />
+              <Text
+                style={{
+                  color: focused ? '#000' : '#748c94',
+                  fontSize: 16,
+                }}>
+                Chat
+              </Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

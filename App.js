@@ -14,7 +14,6 @@ function App() {
     <SafeAreaView style={{flex: 1}}>
       <NavigationContainer>
         <Navigator />
-        {/* <Tabs /> */}
       </NavigationContainer>
     </SafeAreaView>
   );
