@@ -5,6 +5,7 @@ import GameScreen from '../Game';
 import TheGameScreen from '../TheGame.js';
 import {DrawerContent} from '../DrawerContent/drawerContent';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import TabNavigation from '../TabNavigation/tabs';
 
 const Drawer = createDrawerNavigator();
 
@@ -50,6 +51,15 @@ export const Navigator = () => {
         options={{
           title: 'The Game',
           ...screenStyles,
+        }}
+      />
+      <Drawer.Screen
+        name="Tabs"
+        component={TabNavigation}
+        options={{
+          title: 'Tabs',
+          ...screenStyles,
+          headerShown: false,
         }}
       />
     </Drawer.Navigator>
