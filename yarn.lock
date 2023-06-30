@@ -6487,6 +6487,18 @@ react-native-paper@^5.8.0:
     color "^3.1.2"
     use-latest-callback "^0.1.5"
 
+react-native-particle-js@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/react-native-particle-js/-/react-native-particle-js-0.0.1.tgz"
+  integrity sha512-QPHBZtASl/tDnIeT2o+IvmUmFFpu66rAW040FnNsA/ouWa9fkZQZqmBKLagstG1nTAgcd0Uw7zkNSnVuYlVLNQ==
+
+react-native-particles@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/react-native-particles/-/react-native-particles-0.0.8.tgz"
+  integrity sha512-N24j7oFX/myRrriZRigl9XeF3rfCY1NQ9wTpaIgSgbQpDxPrVuoO2NOuTYrXSyi41jpXEg7fN64HpkI8MQXrYg==
+  dependencies:
+    lodash.debounce "^4.0.8"
+
 react-native-reanimated@^3.3.0, "react-native-reanimated@>= 1.0.0":
   version "3.3.0"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.3.0.tgz"
@@ -6518,7 +6530,7 @@ react-native-vector-icons@*, react-native-vector-icons@^9.2.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native@*, react-native@0.72.0:
+react-native@*, react-native@>=0.20.0, react-native@0.72.0:
   version "0.72.0"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.0.tgz"
   integrity sha512-BP2qq5f05pl3zV+eYgW7nmjCV+3zLXs/Vm69xMTCLD34U2bvRhuWbuUhqpauw7fyk5c8+LrY9NKcnARCkqKXcw==
