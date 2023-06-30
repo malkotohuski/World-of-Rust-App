@@ -3,18 +3,30 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import questions from './questions';
 import Table from './table';
 import {tableMock} from './TableMock';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const TheGameScreen = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [eliminatedAnswers, setEliminatedAnswers] = useState([]);
+  const [eliminatedVisible, setEliminatedVisible] = useState(true);
+  const [callTeamVisible, setCallTeamVisible] = useState(true);
 
   const handleTryAgain = () => {
     setGameOver(false);
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setCallTeamVisible(true);
+    setEliminatedVisible(true);
   };
 
   const handleAnswer = answerIndex => {
-    if (selectedAnswer !== null || gameOver) {
+    if (
+      selectedAnswer !== null ||
+      gameOver ||
+      eliminatedAnswers.includes(answerIndex)
+    ) {
       return;
     }
 
@@ -31,19 +43,19 @@ const TheGameScreen = () => {
         setTimeout(() => {
           setCurrentQuestion(currentQuestion + 1);
           setSelectedAnswer(null);
-        }, 1000); // Delay of 1 seconds (1000 milliseconds)
+        }, 1000); // 1 sec
       }
     } else {
       // Wrong answer selected
       setTimeout(() => {
         setGameOver(true);
-      }, 2000); // Delay of 2 seconds (2000 milliseconds)
+      }, 2000); // 2 sec
     }
   };
 
   useEffect(() => {
-    // Clear the selected answer when moving to the next question or screen
     setSelectedAnswer(null);
+    setEliminatedAnswers([]);
   }, [currentQuestion, gameOver]);
 
   const renderAnswers = () => {
@@ -60,25 +72,40 @@ const TheGameScreen = () => {
       const isAnswer2Correct =
         i + 1 === questions[currentQuestion].correctAnswer;
 
+      const isAnswer1Eliminated = eliminatedAnswers.includes(i);
+      const isAnswer2Eliminated = eliminatedAnswers.includes(i + 1);
+
       const answerRow = (
         <View style={styles.answerRow} key={i}>
-          <TouchableOpacity
-            style={[
-              styles.answerButton,
-              isAnswer1Selected && styles.selectedAnswer,
-              isAnswer1Selected && isAnswer1Correct && styles.correctAnswer,
-              isAnswer1Selected && !isAnswer1Correct && styles.incorrectAnswer,
-            ]}
-            onPress={() => handleAnswer(i)}
-            disabled={selectedAnswer !== null || gameOver}>
-            <Text style={styles.answerText}>{answer1}</Text>
-          </TouchableOpacity>
-          {answer2 && (
+          {!isAnswer1Eliminated && (
+            <TouchableOpacity
+              style={[
+                styles.answerButton,
+                isAnswer1Selected && styles.selectedAnswer,
+                (isAnswer1Selected && isAnswer1Correct) ||
+                (selectedAnswer === questions[currentQuestion].correctAnswer &&
+                  isAnswer1Correct)
+                  ? styles.correctAnswer
+                  : null,
+                isAnswer1Selected &&
+                  !isAnswer1Correct &&
+                  styles.incorrectAnswer,
+              ]}
+              onPress={() => handleAnswer(i)}
+              disabled={selectedAnswer !== null || gameOver}>
+              <Text style={styles.answerText}>{answer1}</Text>
+            </TouchableOpacity>
+          )}
+          {answer2 && !isAnswer2Eliminated && (
             <TouchableOpacity
               style={[
                 styles.answerButton,
                 isAnswer2Selected && styles.selectedAnswer,
-                isAnswer2Selected && isAnswer2Correct && styles.correctAnswer,
+                (isAnswer2Selected && isAnswer2Correct) ||
+                (selectedAnswer === questions[currentQuestion].correctAnswer &&
+                  isAnswer2Correct)
+                  ? styles.correctAnswer
+                  : null,
                 isAnswer2Selected &&
                   !isAnswer2Correct &&
                   styles.incorrectAnswer,
@@ -97,6 +124,29 @@ const TheGameScreen = () => {
     return answerRows;
   };
 
+  const handleEliminateClick = () => {
+    const correctAnswerIndex = questions[currentQuestion].correctAnswer;
+    const updatedEliminatedAnswers = [];
+
+    for (let i = 0; i < questions[currentQuestion].answers.length; i++) {
+      if (i !== correctAnswerIndex && updatedEliminatedAnswers.length < 2) {
+        updatedEliminatedAnswers.push(i);
+      }
+    }
+
+    setEliminatedAnswers(updatedEliminatedAnswers);
+    setEliminatedVisible(false);
+  };
+
+  const handlerClickHelp = () => {
+    // logic here!!!
+  };
+
+  const handlerClickCallTeam = () => {
+    handleAnswer(questions[currentQuestion].correctAnswer);
+    setCallTeamVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       {!gameOver && (
@@ -110,6 +160,8 @@ const TheGameScreen = () => {
             <Text style={styles.tryAgain}>Try Again</Text>
           </TouchableOpacity>
         </View>
+      ) : currentQuestion > 1 ? (
+        <Text style={styles.congratsText}>Congratulations!</Text>
       ) : (
         <>
           <Text style={styles.question}>
@@ -118,13 +170,28 @@ const TheGameScreen = () => {
           {renderAnswers()}
         </>
       )}
+
+      <View style={styles.buttonContainer}>
+        {eliminatedVisible && (
+          <TouchableOpacity onPress={handleEliminateClick}>
+            <Icon style={styles.buttonIcon} name="exposure-minus-2" />
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity onPress={handlerClickHelp}>
+          <Icon style={styles.buttonIcon} name="people" />
+        </TouchableOpacity>
+        {callTeamVisible && (
+          <TouchableOpacity onPress={handlerClickCallTeam}>
+            <Icon style={styles.buttonIcon} name="contact-phone" />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'grey',
     flex: 1,
     alignItems: 'flex-end',
     padding: 20,
@@ -137,14 +204,17 @@ const styles = StyleSheet.create({
   },
   answerRow: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
   },
   answerButton: {
     flex: 1,
     backgroundColor: 'coral',
+    flexDirection: 'column',
     borderRadius: 8,
-    padding: 10,
+    padding: 5,
     marginHorizontal: 5,
+    justifyContent: 'space-between',
   },
   answerText: {
     fontSize: 16,
@@ -159,12 +229,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   correctAnswer: {
-    backgroundColor: '#b3e6b3',
+    backgroundColor: 'lightgreen',
   },
   gameOverText: {
     fontSize: 24,
     fontWeight: 'bold',
     alignSelf: 'center',
+  },
+  congratsText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    color: 'green',
+    marginTop: 20,
   },
   gameOver: {
     flex: 1,
@@ -183,6 +260,17 @@ const styles = StyleSheet.create({
   tryAgain: {
     color: 'white',
     fontSize: 18,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
+  buttonIcon: {
+    fontSize: 30,
+    paddingVertical: 5,
   },
 });
 
