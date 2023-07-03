@@ -50,6 +50,7 @@ export const Navigator = () => {
         component={TheGameScreen}
         options={{
           title: 'The Game',
+          unmountOnBlur: true,
           ...screenStyles,
         }}
       />

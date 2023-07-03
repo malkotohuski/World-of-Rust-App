@@ -5,7 +5,8 @@ import Table from './table';
 import {tableMock} from './TableMock';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TheGameScreen = () => {
+const TheGameScreen = props => {
+  const {navigation} = props;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [gameOver, setGameOver] = useState(false);
@@ -52,6 +53,10 @@ const TheGameScreen = () => {
       }, 2000); // 2 sec
     }
   };
+
+  useEffect(() => {
+    setCurrentQuestion(0);
+  }, [navigation]);
 
   useEffect(() => {
     setSelectedAnswer(null);
@@ -161,7 +166,12 @@ const TheGameScreen = () => {
           </TouchableOpacity>
         </View>
       ) : currentQuestion > 1 ? (
-        <Text style={styles.congratsText}>Congratulations!</Text>
+        <View style={styles.gameOver}>
+          <Text style={styles.gameOverText}>Congrats</Text>
+          <TouchableOpacity style={styles.tryAgainBtn} onPress={handleTryAgain}>
+            <Text style={styles.tryAgain}>Try Again</Text>
+          </TouchableOpacity>
+        </View>
       ) : (
         <>
           <Text style={styles.question}>

@@ -3,6 +3,7 @@ import {View, Text, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import styles from '../../styles/styles';
+
 const GameScreen = () => {
   const navigation = useNavigation();
   console.log('sad');
