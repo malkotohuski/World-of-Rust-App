@@ -165,7 +165,7 @@ const TheGameScreen = props => {
             <Text style={styles.tryAgain}>Try Again</Text>
           </TouchableOpacity>
         </View>
-      ) : currentQuestion > 1 ? (
+      ) : currentQuestion > 14 ? (
         <View style={styles.gameOver}>
           <Text style={styles.gameOverText}>Congrats</Text>
           <TouchableOpacity style={styles.tryAgainBtn} onPress={handleTryAgain}>
