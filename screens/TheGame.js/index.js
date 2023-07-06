@@ -11,8 +11,13 @@ const TheGameScreen = props => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [eliminatedAnswers, setEliminatedAnswers] = useState([]);
+
   const [eliminatedVisible, setEliminatedVisible] = useState(true);
   const [callTeamVisible, setCallTeamVisible] = useState(true);
+  const [groupHelpVisible, setGroupHelpVisible] = useState(true);
+
+  const [helpVisible, setHelpVisible] = useState(false); //<---- new one
+  const [percentages, setPercentages] = useState([]);
 
   const handleTryAgain = () => {
     setGameOver(false);
@@ -67,6 +72,8 @@ const TheGameScreen = props => {
     const answers = questions[currentQuestion].answers;
     const answerRows = [];
 
+    const letters = ['A', 'B', 'C', 'D']; // Array of letters
+
     for (let i = 0; i < answers.length; i += 2) {
       const answer1 = answers[i];
       const answer2 = answers[i + 1];
@@ -76,6 +83,9 @@ const TheGameScreen = props => {
       const isAnswer1Correct = i === questions[currentQuestion].correctAnswer;
       const isAnswer2Correct =
         i + 1 === questions[currentQuestion].correctAnswer;
+
+      const letter1 = letters[i];
+      const letter2 = letters[i + 1];
 
       const isAnswer1Eliminated = eliminatedAnswers.includes(i);
       const isAnswer2Eliminated = eliminatedAnswers.includes(i + 1);
@@ -98,7 +108,9 @@ const TheGameScreen = props => {
               ]}
               onPress={() => handleAnswer(i)}
               disabled={selectedAnswer !== null || gameOver}>
-              <Text style={styles.answerText}>{answer1}</Text>
+              <Text style={styles.answerText}>
+                {letter1}. {answer1}
+              </Text>
             </TouchableOpacity>
           )}
           {answer2 && !isAnswer2Eliminated && (
@@ -117,7 +129,9 @@ const TheGameScreen = props => {
               ]}
               onPress={() => handleAnswer(i + 1)}
               disabled={selectedAnswer !== null || gameOver}>
-              <Text style={styles.answerText}>{answer2}</Text>
+              <Text style={styles.answerText}>
+                {letter2}. {answer2}
+              </Text>
             </TouchableOpacity>
           )}
         </View>
@@ -143,8 +157,29 @@ const TheGameScreen = props => {
     setEliminatedVisible(false);
   };
 
+  const letters = ['A', 'B', 'C', 'D']; // Define letters array outside the function
+
   const handlerClickHelp = () => {
-    // logic here!!!
+    const allocatedPercentages = [];
+    let remainingPercentage = 100;
+
+    for (let i = 0; i < letters.length - 1; i++) {
+      const randomPercentage = Math.floor(
+        Math.random() * (remainingPercentage + 1),
+      );
+      allocatedPercentages.push(randomPercentage);
+      remainingPercentage -= randomPercentage;
+    }
+
+    allocatedPercentages.push(remainingPercentage);
+
+    setHelpVisible(true);
+    setPercentages(allocatedPercentages);
+    setGroupHelpVisible(false);
+
+    setTimeout(() => {
+      setHelpVisible(false);
+    }, 10000); // 10 seconds
   };
 
   const handlerClickCallTeam = () => {
@@ -187,15 +222,29 @@ const TheGameScreen = props => {
             <Icon style={styles.buttonIcon} name="exposure-minus-2" />
           </TouchableOpacity>
         )}
-        <TouchableOpacity onPress={handlerClickHelp}>
-          <Icon style={styles.buttonIcon} name="people" />
-        </TouchableOpacity>
+        {groupHelpVisible && (
+          <TouchableOpacity onPress={handlerClickHelp}>
+            <Icon style={styles.buttonIcon} name="people" />
+          </TouchableOpacity>
+        )}
         {callTeamVisible && (
           <TouchableOpacity onPress={handlerClickCallTeam}>
             <Icon style={styles.buttonIcon} name="contact-phone" />
           </TouchableOpacity>
         )}
       </View>
+      {helpVisible && (
+        <View style={styles.helpContainer}>
+          {letters.map((letter, index) => (
+            <View style={styles.helpItem} key={letter}>
+              <Text style={styles.helpItemText}>{letter}</Text>
+              <Text style={styles.helpItemPercentage}>
+                {percentages[index]}%
+              </Text>
+            </View>
+          ))}
+        </View>
+      )}
     </View>
   );
 };
@@ -281,6 +330,32 @@ const styles = StyleSheet.create({
   buttonIcon: {
     fontSize: 30,
     paddingVertical: 5,
+  },
+  helpContainer: {
+    position: 'absolute',
+    top: 150,
+    left: 20,
+    width: '60%',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 8,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+
+  helpItem: {
+    alignItems: 'center',
+  },
+
+  helpItemText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+
+  helpItemPercentage: {
+    fontSize: 14,
+    color: 'gray',
   },
 });
 
