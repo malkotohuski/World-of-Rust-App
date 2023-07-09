@@ -6,6 +6,7 @@ import TheGameScreen from '../TheGame.js';
 import {DrawerContent} from '../DrawerContent/drawerContent';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import TabNavigation from '../TabNavigation/tabs';
+import AccountInfoScreen from '../Settings/AccountInfoScreen.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -59,6 +60,15 @@ export const Navigator = () => {
         component={TabNavigation}
         options={{
           title: 'Tabs',
+          ...screenStyles,
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="AccountInfo"
+        component={AccountInfoScreen}
+        options={{
+          title: 'AccountInfo',
           ...screenStyles,
           headerShown: false,
         }}

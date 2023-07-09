@@ -8,6 +8,7 @@ import {
   Image,
   Switch,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 const SECTIONS = [
@@ -74,6 +75,12 @@ const PROFILE_PICTURE =
   'https://scontent.fsof1-2.fna.fbcdn.net/v/t1.6435-9/167948801_105755308284836_2213881515557944955_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=2cPteDZsVp8AX8y0L9K&_nc_ht=scontent.fsof1-2.fna&oh=00_AfCWhRZv0FQIoNB1Hdo24iqfAiYGuPmplk7NP831bCvhKw&oe=64CC83C3';
 
 const SettingsScreen = () => {
+  const navigation = useNavigation();
+  const [profilePicture, setProfilePicture] = useState(PROFILE_PICTURE);
+  const [profileName, setProfileName] = useState('Daniel Dimitrov');
+  const [profileAddress, setProfileAddress] = useState(
+    '10 BeliMel Street, Sofia, Bulgaria, 1756',
+  );
   const [form, setForm] = useState({
     darkMode: true,
     wifi: false,
@@ -84,9 +91,13 @@ const SettingsScreen = () => {
     <ScrollView style={{flex: 1, paddingVertical: 24}}>
       <View style={styles.profile}>
         <TouchableOpacity
-          onPress={() => {
-            //handler onPress
-          }}>
+          onPress={() =>
+            navigation.navigate('AccountInfo', {
+              setProfilePicture,
+              setProfileName,
+              setProfileAddress,
+            })
+          }>
           <View style={styles.profileAvatarWrapper}>
             <Image
               alt="Profile picture"

@@ -81,7 +81,9 @@ export function DrawerContent(props) {
                 <Icon name="settings" color={color} size={size} />
               )}
               label="Settings"
-              onPress={() => {}}
+              onPress={() => {
+                props.navigation.navigate('Settings');
+              }}
             />
           </Drawer.Section>
           <Drawer.Section title="Preferences">
