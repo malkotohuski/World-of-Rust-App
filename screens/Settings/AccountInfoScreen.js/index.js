@@ -25,15 +25,17 @@ const AccountInfoScreen = ({route, navigation}) => {
     setProfilePicture(newProfilePicture);
     setProfileName(newProfileName);
     setProfileAddress(newProfileAddress);
-    // Implement the logic to save the changes here
-    // You can update the values in the parent component or send them to an API
-    // For now, we'll just log the changes
+
     console.log('New Profile Picture:', newProfilePicture);
     console.log('New Profile Name:', newProfileName);
     console.log('New Profile Address:', newProfileAddress);
 
-    // Navigate back to the Settings screen after saving the changes
-    navigation.goBack();
+    navigation.navigate('Settings', {
+      newProfilePicture,
+      newProfileName,
+      newProfileAddress,
+    });
+    // Navigate back to the Settings screen
   };
 
   return (
