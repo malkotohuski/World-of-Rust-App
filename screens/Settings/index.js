@@ -74,8 +74,10 @@ const SECTIONS = [
 const PROFILE_PICTURE =
   'https://scontent.fsof1-2.fna.fbcdn.net/v/t1.6435-9/167948801_105755308284836_2213881515557944955_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=2cPteDZsVp8AX8y0L9K&_nc_ht=scontent.fsof1-2.fna&oh=00_AfCWhRZv0FQIoNB1Hdo24iqfAiYGuPmplk7NP831bCvhKw&oe=64CC83C3';
 
-const SettingsScreen = () => {
+const SettingsScreen = ({route}) => {
   const navigation = useNavigation();
+  const {newProfilePicture, newProfileName, newProfileAddress} =
+    route.params || {}; // Update the destructuring
   const [profilePicture, setProfilePicture] = useState(PROFILE_PICTURE);
   const [profileName, setProfileName] = useState('Daniel Dimitrov');
   const [profileAddress, setProfileAddress] = useState(
@@ -101,7 +103,7 @@ const SettingsScreen = () => {
           <View style={styles.profileAvatarWrapper}>
             <Image
               alt="Profile picture"
-              source={{uri: PROFILE_PICTURE}}
+              source={{uri: newProfilePicture || profilePicture}} // Use newProfilePicture if available, otherwise fallback to PROFILE_PICTURE
               style={styles.profileAvatar}
             />
             <View style={styles.profileAction}>
@@ -109,9 +111,10 @@ const SettingsScreen = () => {
             </View>
           </View>
         </TouchableOpacity>
-        <Text style={styles.profileName}>Daniel Dimitrov</Text>
+        <Text style={styles.profileName}>{newProfileName || profileName}</Text>
+        {/* <Text style={styles.profileName}>Daniel Dimitrov</Text>   */}
         <Text style={styles.profileAddress}>
-          10 BeliMel Street, Sofia, Bulgaria, 1756
+          {newProfileAddress || profileAddress}
         </Text>
       </View>
 
@@ -174,8 +177,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   profileAvatar: {
-    width: 72,
-    height: 72,
+    width: 112,
+    height: 112,
     borderRadius: 9999,
   },
   profileAvatarWrapper: {
