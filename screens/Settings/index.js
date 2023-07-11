@@ -67,6 +67,7 @@ const SECTIONS = [
     items: [
       {icon: 'save', color: '#32c759', label: 'Saved', type: ' link'},
       {icon: 'download', color: '#fd2d54', label: 'Download', type: ' link'},
+      {icon: 'hard-drive', color: '#fd2d54', label: 'Storage', type: ' link'},
     ],
   },
 ];
