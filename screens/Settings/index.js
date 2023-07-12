@@ -16,7 +16,7 @@ const SECTIONS = [
     header: 'Preferneces',
     icon: 'settings',
     items: [
-      {icon: 'globe', color: '#fe9488', label: 'Language', type: 'link'},
+      {icon: 'map', color: '#fe9488', label: 'Language', type: 'link'},
       {
         id: 'darkMode',
         icon: 'moon',
@@ -51,6 +51,8 @@ const SECTIONS = [
         label: 'Accessibility Mode',
         type: 'toggle',
       },
+      {icon: 'music', color: '#fd2d54', label: 'Sounds', type: ' link'},
+      {icon: 'tool', color: '#fd2d54', label: 'Tools', type: ' link'},
     ],
   },
   {
@@ -67,7 +69,8 @@ const SECTIONS = [
     items: [
       {icon: 'save', color: '#32c759', label: 'Saved', type: ' link'},
       {icon: 'download', color: '#fd2d54', label: 'Download', type: ' link'},
-      {icon: 'hard-drive', color: '#fd2d54', label: 'Storage', type: ' link'},
+      {icon: 'hard-drive', color: '#007afe', label: 'Storage', type: ' link'},
+      {icon: 'info', color: '#fe9488', label: 'Info', type: ' link'},
     ],
   },
 ];
