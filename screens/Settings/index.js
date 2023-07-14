@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 const SECTIONS = [
   {
-    header: 'Preferneces',
+    header: 'Preferences',
     icon: 'settings',
     items: [
       {icon: 'map', color: '#fe9488', label: 'Language', type: 'link'},
@@ -51,26 +51,26 @@ const SECTIONS = [
         label: 'Accessibility Mode',
         type: 'toggle',
       },
-      {icon: 'music', color: '#fd2d54', label: 'Sounds', type: ' link'},
-      {icon: 'tool', color: '#fd2d54', label: 'Tools', type: ' link'},
+      {icon: 'music', color: '#fd2d54', label: 'Sounds', type: 'link'},
+      {icon: 'tool', color: '#fd2d54', label: 'Tools', type: 'link'},
     ],
   },
   {
     header: 'Help',
     icon: 'help-circle',
     items: [
-      {icon: 'save', color: '#8c8d91', label: 'Report Bug', type: ' link'},
-      {icon: 'mail', color: '#007afe', label: 'Contact Us', type: ' link'},
+      {icon: 'save', color: '#8c8d91', label: 'Report Bug', type: 'link'},
+      {icon: 'mail', color: '#007afe', label: 'Contact Us', type: 'link'},
     ],
   },
   {
     header: 'Content',
     icon: 'align-center',
     items: [
-      {icon: 'save', color: '#32c759', label: 'Saved', type: ' link'},
-      {icon: 'download', color: '#fd2d54', label: 'Download', type: ' link'},
-      {icon: 'hard-drive', color: '#007afe', label: 'Storage', type: ' link'},
-      {icon: 'info', color: '#fe9488', label: 'Info', type: ' link'},
+      {icon: 'save', color: '#32c759', label: 'Saved', type: 'link'},
+      {icon: 'download', color: '#fd2d54', label: 'Download', type: 'link'},
+      {icon: 'hard-drive', color: '#007afe', label: 'Storage', type: 'link'},
+      {icon: 'info', color: '#fe9488', label: 'Info', type: 'link'},
     ],
   },
 ];
@@ -81,7 +81,7 @@ const PROFILE_PICTURE =
 const SettingsScreen = ({route}) => {
   const navigation = useNavigation();
   const {newProfilePicture, newProfileName, newProfileAddress} =
-    route.params || {}; // Update the destructuring
+    route.params || {};
   const [profilePicture, setProfilePicture] = useState(PROFILE_PICTURE);
   const [profileName, setProfileName] = useState('Daniel Dimitrov');
   const [profileAddress, setProfileAddress] = useState(
@@ -93,8 +93,15 @@ const SettingsScreen = ({route}) => {
     showCollaborators: true,
     accessibilityMode: false,
   });
+
+  const isDarkMode = form.darkMode;
+
   return (
-    <ScrollView style={{flex: 1, paddingVertical: 24}}>
+    <ScrollView
+      style={[
+        styles.container,
+        isDarkMode && styles.containerDark, // Apply dark mode to the container
+      ]}>
       <View style={styles.profile}>
         <TouchableOpacity
           onPress={() =>
@@ -107,7 +114,7 @@ const SettingsScreen = ({route}) => {
           <View style={styles.profileAvatarWrapper}>
             <Image
               alt="Profile picture"
-              source={{uri: newProfilePicture || profilePicture}} // Use newProfilePicture if available, otherwise fallback to PROFILE_PICTURE
+              source={{uri: newProfilePicture || profilePicture}}
               style={styles.profileAvatar}
             />
             <View style={styles.profileAction}>
@@ -115,57 +122,71 @@ const SettingsScreen = ({route}) => {
             </View>
           </View>
         </TouchableOpacity>
-        <Text style={styles.profileName}>{newProfileName || profileName}</Text>
-        {/* <Text style={styles.profileName}>Daniel Dimitrov</Text>   */}
+        <Text
+          style={[styles.profileName, isDarkMode && styles.profileNameDark]}>
+          {newProfileName || profileName}
+        </Text>
         <Text style={styles.profileAddress}>
           {newProfileAddress || profileAddress}
         </Text>
       </View>
 
-      {SECTIONS.map(({header, items}) => (
-        <View style={styles.section} key={header}>
-          <Text style={styles.sectionHeader}>{header}</Text>
+      {SECTIONS.map(({header, items}) => {
+        const sectionStyle = isDarkMode ? styles.darkSection : styles.section;
 
-          {items.map(({id, label, type, icon, color}) => (
-            <TouchableOpacity
-              key={icon}
-              onPress={() => {
-                //handler onPress
-              }}>
-              <View style={styles.row}>
-                <View style={[styles.rowIcon, {backgroundColor: color}]}>
-                  <Icon name={icon} color="#fff" size={18} />
+        return (
+          <View style={sectionStyle} key={header}>
+            <Text style={styles.sectionHeader}>{header}</Text>
+
+            {items.map(({id, label, type, icon, color}) => (
+              <TouchableOpacity
+                key={icon}
+                onPress={() => {
+                  // Handler onPress
+                }}>
+                <View style={styles.row}>
+                  <View style={[styles.rowIcon, {backgroundColor: color}]}>
+                    <Icon name={icon} color="#fff" size={18} />
+                  </View>
+                  <Text style={styles.rowLabel}>{label}</Text>
+
+                  <View style={{flex: 1}} />
+
+                  {type === 'toggle' && (
+                    <Switch
+                      value={form[id]}
+                      onValueChange={value => setForm({...form, [id]: value})}
+                    />
+                  )}
+
+                  {type === 'link' && (
+                    <Icon name="chevron-right" color="#0c0c0c" size={22} />
+                  )}
                 </View>
-                <Text style={styles.rowLabel}>{label}</Text>
-
-                <View style={{flex: 1}} />
-
-                {type === 'toggle' && (
-                  <Switch
-                    value={form[id]}
-                    onValueChange={value => setForm({...form, [id]: value})}
-                  />
-                )}
-
-                {type === 'link' && (
-                  <Icon name="chevron-right" color="#0c0c0c" size={22} />
-                )}
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-      ))}
+              </TouchableOpacity>
+            ))}
+          </View>
+        );
+      })}
     </ScrollView>
   );
 };
 
-export default SettingsScreen;
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingVertical: 24,
+  },
+  containerDark: {
+    backgroundColor: '#333333', // Dark mode background color
+  },
   profile: {
     padding: 24,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginBottom: 24,
   },
   profileName: {
     marginTop: 20,
@@ -173,6 +194,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#414d63',
     textAlign: 'center',
+  },
+  profileNameDark: {
+    color: '#fff', // Dark mode profile name color
   },
   profileAddress: {
     marginTop: 5,
@@ -199,8 +223,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  darkSection: {
+    paddingHorizontal: 24,
+    backgroundColor: '#555555', // Dark mode section background color
+    borderRadius: 8,
+    marginBottom: 12,
+  },
   section: {
     paddingHorizontal: 24,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginBottom: 12,
   },
   sectionHeader: {
     paddingVertical: 12,
@@ -233,3 +266,5 @@ const styles = StyleSheet.create({
     color: '#0c0c0c',
   },
 });
+
+export default SettingsScreen;

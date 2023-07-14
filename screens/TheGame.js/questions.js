@@ -169,5 +169,6 @@ const questions = [
   },
   // Add more questions here
 ];
+questions.sort((a, b) => a.order - b.order);
 
 export default questions;
