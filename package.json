@@ -19,6 +19,7 @@
     "react": "18.2.0",
     "react-native": "0.72.0",
     "react-native-gesture-handler": "^2.12.0",
+    "react-native-gifted-chat": "^2.4.0",
     "react-native-paper": "^5.8.0",
     "react-native-particle-js": "^0.0.1",
     "react-native-particles": "^0.0.8",
