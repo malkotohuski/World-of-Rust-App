@@ -23,13 +23,13 @@ const TabNavigation = () => {
         },
       }}>
       <Tab.Screen
-        name="LETS START"
+        name="LETS PLAY !"
         component={HomeScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <TouchableOpacity
               style={{alignItems: 'center', justifyContent: 'center'}}
-              onPress={() => navigation.navigate('Can you survive !')}>
+              onPress={() => navigation.navigate('LETS PLAY !')}>
               <Icon
                 name="home"
                 size={30}
