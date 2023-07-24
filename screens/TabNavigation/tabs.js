@@ -23,7 +23,7 @@ const TabNavigation = () => {
         },
       }}>
       <Tab.Screen
-        name="Can you survive !"
+        name="LETS START"
         component={HomeScreen}
         options={{
           tabBarIcon: ({focused}) => (

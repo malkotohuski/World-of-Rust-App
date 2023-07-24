@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Switch,
+  ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -98,11 +99,14 @@ const SettingsScreen = ({route}) => {
 
   return (
     <ScrollView
+      source={require('../../images/backgroundImageRust.jpg')}
       style={[
         styles.container,
         isDarkMode && styles.containerDark, // Apply dark mode to the container
       ]}>
-      <View style={styles.profile}>
+      <ImageBackground
+        source={require('../../images/backgroundImageRust.jpg')}
+        style={[styles.profile, isDarkMode && styles.profileDark]}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('AccountInfo', {
@@ -129,13 +133,16 @@ const SettingsScreen = ({route}) => {
         <Text style={styles.profileAddress}>
           {newProfileAddress || profileAddress}
         </Text>
-      </View>
+      </ImageBackground>
 
       {SECTIONS.map(({header, items}) => {
         const sectionStyle = isDarkMode ? styles.darkSection : styles.section;
 
         return (
-          <View style={sectionStyle} key={header}>
+          <View
+            source={require('../../images/backgroundImageRust.jpg')}
+            style={sectionStyle}
+            key={header}>
             <Text style={styles.sectionHeader}>{header}</Text>
 
             {items.map(({id, label, type, icon, color}) => (
@@ -188,6 +195,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 24,
   },
+  profileDark: {
+    padding: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#777',
+    borderRadius: 8,
+    marginBottom: 24,
+  },
   profileName: {
     marginTop: 20,
     fontSize: 19,
@@ -196,12 +211,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   profileNameDark: {
-    color: '#fff', // Dark mode profile name color
+    color: '#000', // Dark mode profile name color
   },
   profileAddress: {
     marginTop: 5,
     fontSize: 16,
-    color: '#989898',
+    color: '#000',
     textAlign: 'center',
   },
   profileAvatar: {
