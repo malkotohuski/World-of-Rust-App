@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   },
   section: {
     paddingHorizontal: 24,
-    backgroundColor: '#fff',
+    backgroundColor: '#999',
     borderRadius: 8,
     marginBottom: 12,
   },
