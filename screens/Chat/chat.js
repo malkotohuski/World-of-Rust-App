@@ -28,19 +28,40 @@ const Chat = () => {
     setMessage('');
   };
 
+  const renderProfileImage = isUserMessage => {
+    if (isUserMessage) {
+      return (
+        <Image
+          source={{
+            uri: 'https://scontent.fsof9-1.fna.fbcdn.net/v/t1.6435-9/167948801_105755308284836_2213881515557944955_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=_q_RD3CqnjIAX8zyeTF&_nc_ht=scontent.fsof9-1.fna&oh=00_AfCp-pEyYBkVEKv51sY5GUXNHmXU7Op-x2_kdPHWrIW6Hw&oe=64D89983',
+          }}
+          style={styles.profileAvatar}
+        />
+      );
+    }
+  };
+
   const renderItem = ({item}) => {
     const isUserMessage = item.sender === 'user';
 
     return (
-      <View
-        style={[
-          styles.messageContainer,
-          isUserMessage && styles.userMessageContainer,
-        ]}>
-        <Text
-          style={[styles.messageText, isUserMessage && styles.userMessageText]}>
-          {item.text}
-        </Text>
+      <View>
+        <View style={styles.profileNameContainer}>
+          {renderProfileImage(isUserMessage)}
+        </View>
+        <View
+          style={[
+            styles.messageContainer,
+            isUserMessage && styles.userMessageContainer,
+          ]}>
+          <Text
+            style={[
+              styles.messageText,
+              isUserMessage && styles.userMessageText,
+            ]}>
+            {item.text}
+          </Text>
+        </View>
       </View>
     );
   };
@@ -94,7 +115,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
   },
   profileAvatar: {
     width: 40,
@@ -142,7 +163,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     paddingHorizontal: 8,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#ccc',
     borderRadius: 8,
   },
   sendButton: {
@@ -155,6 +176,23 @@ const styles = StyleSheet.create({
   sendButtonText: {
     fontSize: 16,
     color: '#fff',
+  },
+  profileNameContainer: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#f5f5f5',
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    marginBottom: 4,
+  },
+  profileNameText: {
+    fontSize: 12,
+    color: '#999',
+  },
+  profilePicture: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 12,
   },
 });
 
