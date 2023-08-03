@@ -169,6 +169,15 @@ const questions = [
   },
   // Add more questions here
 ];
-questions.sort((a, b) => a.order - b.order);
+
+const shuffleQuestions = array => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
+// Shuffle the questions array
+shuffleQuestions(questions);
 
 export default questions;
