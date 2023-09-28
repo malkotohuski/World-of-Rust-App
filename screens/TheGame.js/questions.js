@@ -167,6 +167,125 @@ const questions = [
     correctAnswer: 0,
     type: 'medium',
   },
+  {
+    question: 'What size ammo can Python use?',
+    answers: [
+      'Explosive 5.56 Rifle Ammo',
+      '12 Gauge Buckshot',
+      '40mm HE Grenade',
+      'Incendiary Pistol Bullet',
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What size ammo can the LR-300 Assault Rifle use?',
+    answers: ['12 Gauge Slug', 'Pistol Bullet', '5.56 Rifle Ammo', 'Rocket'],
+    correctAnswerIndex: 2,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What ingredients do you need to make an F1 grenade?',
+    answers: [
+      'Gun Powder:30, Metal Fragments:25',
+      'Sulfur:100, Gun Powder:50',
+      'Metal Fragments:25, Gun Powder:30',
+      'Gun Powder:25, Metal Fragments:30',
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What ingredients do you need to make an 8x Zoom Scope?',
+    answers: [
+      'High Quality Metal:30',
+      'High Quality Metal:50',
+      'High Quality Metal:25, Tech Trash:5 ',
+      'High Quality Metal:45, Tech Trash:10',
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 'medium',
+  },
+  {
+    question:
+      'What ingredients do you need to make a Medical Syringe Blueprint?',
+    answers: [
+      'Cloth:10, Metal Fragments:10, Low Grade Fuel:10',
+      'Cloth:20, Metal Fragments:20, Low Grade Fuel:20',
+      'Cloth:15, Metal Fragments:10, Low Grade Fuel:10',
+      'Animal Fat:30, Metal Fragments:10, Low Grade Fuel:10',
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What ingredients do you need to make a Holosight?',
+    answers: [
+      'High Quality Metal:12, Tech Trash:1',
+      'High Quality Metal:10, Tech Trash:2',
+      'High Quality Metal:1, Tech Trash:10',
+      'High Quality Metal:10',
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What ingredients do you need to make a Triangle Ladder Hatch?',
+    answers: [
+      'Wooden Ladder:1, Metal Fragments:200, Gears:3',
+      'Wooden Ladder:2, Metal Fragments:300, Gears:5',
+      'Wooden Ladder:1, Metal Fragments:300, Gears:3',
+      'Wooden Ladder:3, Metal Fragments:100, Gears:2',
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What ingredients do you need to make a Gears?',
+    answers: [
+      'Metal Fragments:50, Scrap:100',
+      'Metal Fragments:100, Scrap:10',
+      'Metal Fragments:10, Scrap:50',
+      'Metal Fragments:25, Scrap:100',
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 'medium',
+  },
+  {
+    question: 'What ingredients do you need to make a Key Lock?',
+    answers: ['Wood:75', 'Wood:100', 'Wood:50', 'Metal Fragments:25, Wood:25'],
+    correctAnswerIndex: 0,
+    difficulty: 'medium',
+  },
+  {
+    question:
+      'How much scrap will it cost you to buy a Blue Keycard from Outpost?',
+    answers: ['Scrap:150', 'Scrap:200', 'Scrap:100', 'Scrap:75'],
+    correctAnswerIndex: 2,
+    difficulty: 'medium',
+  },
+  {
+    question: 'How much is the power consumption of the Auto Turret ?',
+    answers: [
+      'Consumption 5 Energy',
+      'Consumption 10 Energy',
+      'Consumption 12 Energy',
+      'Consumption 8 Energy',
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 'medium',
+  },
+  {
+    question: 'How much is the power consumption of Large Neon Sign ?',
+    answers: [
+      'Consumption 5 Energy',
+      'Consumption 3 Energy',
+      'Consumption 10 Energy',
+      'Consumption 8 Energy',
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 'medium',
+  },
   // Add more questions here
 ];
 
