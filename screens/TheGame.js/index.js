@@ -179,7 +179,7 @@ const TheGameScreen = props => {
 
     setTimeout(() => {
       setHelpVisible(false);
-    }, 10000); // 10 seconds
+    }, 15000); // 10 seconds
   };
 
   const handlerClickCallTeam = () => {
