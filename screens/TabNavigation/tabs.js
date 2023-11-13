@@ -1,13 +1,13 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { Text, TouchableOpacity } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../Home';
 import FindScreen from '../Find';
 import PostScreen from '../Post';
 import SettingsScreen from '../Settings';
 import ChatScreen from '../Chat/chat';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,9 +26,9 @@ const TabNavigation = () => {
         name="LETS PLAY !"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
+              style={{ alignItems: 'center', justifyContent: 'center' }}
               onPress={() => navigation.navigate('LETS PLAY !')}>
               <Icon
                 name="home"
@@ -50,9 +50,9 @@ const TabNavigation = () => {
         name="Find"
         component={FindScreen}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
+              style={{ alignItems: 'center', justifyContent: 'center' }}
               onPress={() => navigation.navigate('Find')}>
               <Icon
                 name="find-in-page"
@@ -74,9 +74,9 @@ const TabNavigation = () => {
         name="Post"
         component={PostScreen}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
+              style={{ alignItems: 'center', justifyContent: 'center' }}
               onPress={() => navigation.navigate('Post')}>
               <Icon
                 name="mail"
@@ -98,9 +98,9 @@ const TabNavigation = () => {
         name="Settings"
         component={SettingsScreen}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
+              style={{ alignItems: 'center', justifyContent: 'center' }}
               onPress={() => navigation.navigate('Settings')}>
               <Icon
                 name="settings"
@@ -122,9 +122,9 @@ const TabNavigation = () => {
         name="Chat"
         component={ChatScreen}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
+              style={{ alignItems: 'center', justifyContent: 'center' }}
               onPress={() => navigation.navigate('Chat')}>
               <Icon
                 name="chat"
