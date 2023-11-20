@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import {
   Avatar,
   Title,
   Caption,
-  Paragraph,
   Drawer,
   Text,
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export function DrawerContent(props) {
@@ -27,14 +26,14 @@ export function DrawerContent(props) {
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 15}}>
+            <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <Avatar.Image
                 source={{
                   uri: 'https://scontent.fsof10-1.fna.fbcdn.net/v/t1.6435-9/167427853_105756281618072_5135626485186527955_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=e3f864&_nc_ohc=GHsaXms-4-AAX_8xtWY&_nc_ht=scontent.fsof10-1.fna&oh=00_AfBhbpEeTf2f6ExfbwqNrZUdiQOzksxs84H76HFGKwiSpg&oe=64C268AF',
                 }}
                 size={50}
               />
-              <View style={{marginLeft: 15, flexDirection: 'column'}}>
+              <View style={{ marginLeft: 15, flexDirection: 'column' }}>
                 <Title style={styles.title}>Little Husky</Title>
                 <Caption style={styles.caption}>malkotohuski@gmail.com</Caption>
               </View>
@@ -43,7 +42,7 @@ export function DrawerContent(props) {
 
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({color, size}) => (
+              icon={({ color, size }) => (
                 <Icon name="person" color={color} size={size} />
               )}
               label="My Account"
@@ -52,7 +51,7 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
+              icon={({ color, size }) => (
                 <Icon name="leaderboard" color={color} size={size} />
               )}
               label="Leader Board"
@@ -61,7 +60,7 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
+              icon={({ color, size }) => (
                 <Icon name="videogame-asset" color={color} size={size} />
               )}
               label="The Game"
@@ -70,14 +69,14 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
+              icon={({ color, size }) => (
                 <Icon name="contact-support" color={color} size={size} />
               )}
               label="Contacts-us"
-              onPress={() => {}}
+              onPress={() => { }}
             />
             <DrawerItem
-              icon={({color, size}) => (
+              icon={({ color, size }) => (
                 <Icon name="settings" color={color} size={size} />
               )}
               label="Settings"
@@ -103,11 +102,11 @@ export function DrawerContent(props) {
       </DrawerContentScrollView>
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sing Out"
-          onPress={() => {}}
+          onPress={() => { }}
         />
       </Drawer.Section>
     </View>
