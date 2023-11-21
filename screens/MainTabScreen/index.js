@@ -3,10 +3,11 @@ import Login from '../Login';
 import Register from '../Register';
 import GameScreen from '../Game';
 import TheGameScreen from '../TheGame.js';
-import {DrawerContent} from '../DrawerContent/drawerContent';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { DrawerContent } from '../DrawerContent/drawerContent';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import TabNavigation from '../TabNavigation/tabs';
 import AccountInfoScreen from '../Settings/AccountInfoScreen.js';
+import LanguageSelectionScreen from '../Settings/Languages/LanguagesSelectionScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -69,6 +70,15 @@ export const Navigator = () => {
         component={AccountInfoScreen}
         options={{
           title: 'AccountInfo',
+          ...screenStyles,
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="LanguageSelection"
+        component={LanguageSelectionScreen}
+        options={{
+          title: 'LanguageSelection',
           ...screenStyles,
           headerShown: false,
         }}

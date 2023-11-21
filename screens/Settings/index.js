@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,16 +8,26 @@ import {
   Image,
   Switch,
   ImageBackground,
+  Modal,
+  FlatList,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import LanguageSelectionScreen from './Languages/LanguagesSelectionScreen';
+
 
 const SECTIONS = [
   {
     header: 'Preferences',
     icon: 'settings',
     items: [
-      {icon: 'map', color: '#fe9488', label: 'Language', type: 'link'},
+      {
+        id: 'Language',
+        icon: 'map',
+        color: '#fe9488',
+        label: 'Language',
+        type: 'language'
+      },
       {
         id: 'darkMode',
         icon: 'moon',
@@ -52,26 +62,26 @@ const SECTIONS = [
         label: 'Accessibility Mode',
         type: 'toggle',
       },
-      {icon: 'music', color: '#fd2d54', label: 'Sounds', type: 'link'},
-      {icon: 'tool', color: '#fd2d54', label: 'Tools', type: 'link'},
+      { icon: 'music', color: '#fd2d54', label: 'Sounds', type: 'link' },
+      { icon: 'tool', color: '#fd2d54', label: 'Tools', type: 'link' },
     ],
   },
   {
     header: 'Help',
     icon: 'help-circle',
     items: [
-      {icon: 'save', color: '#8c8d91', label: 'Report Bug', type: 'link'},
-      {icon: 'mail', color: '#007afe', label: 'Contact Us', type: 'link'},
+      { icon: 'save', color: '#8c8d91', label: 'Report Bug', type: 'link' },
+      { icon: 'mail', color: '#007afe', label: 'Contact Us', type: 'link' },
     ],
   },
   {
     header: 'Content',
     icon: 'align-center',
     items: [
-      {icon: 'save', color: '#32c759', label: 'Saved', type: 'link'},
-      {icon: 'download', color: '#fd2d54', label: 'Download', type: 'link'},
-      {icon: 'hard-drive', color: '#007afe', label: 'Storage', type: 'link'},
-      {icon: 'info', color: '#fe9488', label: 'Info', type: 'link'},
+      { icon: 'save', color: '#32c759', label: 'Saved', type: 'link' },
+      { icon: 'download', color: '#fd2d54', label: 'Download', type: 'link' },
+      { icon: 'hard-drive', color: '#007afe', label: 'Storage', type: 'link' },
+      { icon: 'info', color: '#fe9488', label: 'Info', type: 'link' },
     ],
   },
 ];
@@ -79,21 +89,45 @@ const SECTIONS = [
 const PROFILE_PICTURE =
   'https://scontent.fsof1-2.fna.fbcdn.net/v/t1.6435-9/167948801_105755308284836_2213881515557944955_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=2cPteDZsVp8AX8y0L9K&_nc_ht=scontent.fsof1-2.fna&oh=00_AfCWhRZv0FQIoNB1Hdo24iqfAiYGuPmplk7NP831bCvhKw&oe=64CC83C3';
 
-const SettingsScreen = ({route}) => {
+const SettingsScreen = ({ route }) => {
   const navigation = useNavigation();
-  const {newProfilePicture, newProfileName, newProfileAddress} =
+
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [isLanguageModalVisible, setLanguageModalVisible] = useState(false);
+
+  const { newProfilePicture, newProfileName, newProfileAddress } =
     route.params || {};
   const [profilePicture, setProfilePicture] = useState(PROFILE_PICTURE);
   const [profileName, setProfileName] = useState('Daniel Dimitrov');
   const [profileAddress, setProfileAddress] = useState(
     '10 BeliMel Street, Sofia, Bulgaria, 1756',
   );
+
   const [form, setForm] = useState({
     darkMode: true,
     wifi: false,
     showCollaborators: true,
     accessibilityMode: false,
   });
+
+  const LanguagesSelectionScreenFunction = () => {
+    navigation.navigate('LanguageSelection', {
+      onSelectLanguage: handleLanguageSelection,
+    });
+  };
+
+  const handleLanguageSelection = (language) => {
+    // Update selectedLanguage state based on user selection
+    setSelectedLanguage(language);
+    setForm({ ...form, Language: language }); // Update the form state with the selected language
+    hideLanguageModal();
+  };
+
+  const hideLanguageModal = () => {
+    setLanguageModalVisible(false);
+  };
+
+
 
   const isDarkMode = form.darkMode;
 
@@ -118,7 +152,7 @@ const SettingsScreen = ({route}) => {
           <View style={styles.profileAvatarWrapper}>
             <Image
               alt="Profile picture"
-              source={{uri: newProfilePicture || profilePicture}}
+              source={{ uri: newProfilePicture || profilePicture }}
               style={styles.profileAvatar}
             />
             <View style={styles.profileAction}>
@@ -135,34 +169,40 @@ const SettingsScreen = ({route}) => {
         </Text>
       </ImageBackground>
 
-      {SECTIONS.map(({header, items}) => {
+      {SECTIONS.map(({ header, items }) => {
         const sectionStyle = isDarkMode ? styles.darkSection : styles.section;
 
         return (
           <View
             source={require('../../images/backgroundImageRust.jpg')}
             style={sectionStyle}
-            key={header}>
+            key={header}
+          >
             <Text style={styles.sectionHeader}>{header}</Text>
 
-            {items.map(({id, label, type, icon, color}) => (
+            {items.map(({ id, label, type, icon, color }) => (
               <TouchableOpacity
                 key={icon}
                 onPress={() => {
-                  // Handler onPress
+                  if (type === 'language') {
+                    LanguagesSelectionScreenFunction();
+                    // Update the selectedLanguage state based on user selection
+                  } else {
+                    // Handle other types (toggle, link) as before
+                  }
                 }}>
                 <View style={styles.row}>
-                  <View style={[styles.rowIcon, {backgroundColor: color}]}>
+                  <View style={[styles.rowIcon, { backgroundColor: color }]}>
                     <Icon name={icon} color="#fff" size={18} />
                   </View>
                   <Text style={styles.rowLabel}>{label}</Text>
 
-                  <View style={{flex: 1}} />
+                  <View style={{ flex: 1 }} />
 
                   {type === 'toggle' && (
                     <Switch
                       value={form[id]}
-                      onValueChange={value => setForm({...form, [id]: value})}
+                      onValueChange={value => setForm({ ...form, [id]: value })}
                     />
                   )}
 
@@ -175,6 +215,33 @@ const SettingsScreen = ({route}) => {
           </View>
         );
       })}
+      <Modal
+        transparent={true}
+        animationType="slide"
+        visible={isLanguageModalVisible}
+        onRequestClose={hideLanguageModal}
+      >
+        <View style={styles.languageModalContainer}>
+          <View style={styles.languageModal}>
+            <Text style={styles.languageModalTitle}>Select Language</Text>
+            <FlatList
+              data={['German', 'English', 'French', 'Italian']}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.languageItem}
+                  onPress={() => handleLanguageSelection(item)}
+                >
+                  <Text>{item}</Text>
+                </TouchableOpacity>
+              )}
+            />
+            <TouchableOpacity onPress={hideLanguageModal}>
+              <Text style={styles.languageModalCancel}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
