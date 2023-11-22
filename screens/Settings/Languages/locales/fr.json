@@ -1,0 +1,19 @@
+{
+    "language": "Language",
+    "darkMode": "Dark Mode",
+    "wifi": "Use Wi-Fi",
+    "navigation": "Location",
+    "showCollaborators": "Show Collaborators",
+    "accessibilityMode": "Accessibility Mode",
+    "sounds": "Sounds",
+    "tools": "Tools",
+    "reportBug": "Report Bug",
+    "contactUs": "Contact Us",
+    "saved": "Saved",
+    "download": "Download",
+    "storage": "Storage",
+    "info": "Info",
+    "preferences": "Preferences",
+    "help": "Help",
+    "content": "Content"
+  }

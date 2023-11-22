@@ -14,8 +14,8 @@ const LanguageSelectionScreen = ({ navigation, route }) => {
     };
 
     const languages = [
-        { label: 'German', value: 'German' },
         { label: 'English', value: 'English' },
+        { label: 'German', value: 'German' },
         { label: 'French', value: 'French' },
         { label: 'Italian', value: 'Italian' },
     ];
