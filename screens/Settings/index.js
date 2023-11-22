@@ -14,52 +14,56 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import LanguageSelectionScreen from './Languages/LanguagesSelectionScreen';
+import { useTranslation, initReactI18next } from 'react-i18next';
+import i18n from 'i18next';
+import { t } from 'i18next';
+import en from './Languages/locales/en.json'
 
 
 const SECTIONS = [
   {
-    header: 'Preferences',
+    header: t('preferences'),
     icon: 'settings',
     items: [
       {
-        id: 'Language',
+        id: 'language',
         icon: 'map',
         color: '#fe9488',
-        label: 'Language',
+        label: t('language'),
         type: 'language'
       },
       {
         id: 'darkMode',
         icon: 'moon',
         color: '#007afe',
-        label: 'Dark Mode',
+        label: t('Dark Mode'),
         type: 'toggle',
       },
       {
         id: 'wifi',
         icon: 'wifi',
         color: '#007afe',
-        label: 'Use Wi-Fi',
+        label: t('Use Wi-Fi'),
         type: 'toggle',
       },
       {
         id: 'navigation',
         color: '#32c759',
-        label: 'Location',
+        label: t('Location'),
         type: 'link',
       },
       {
         id: 'showCollaborators',
         icon: 'users',
         color: '#32c759',
-        label: 'Show Collaborators',
+        label: t('Show Collaborators'),
         type: 'toggle',
       },
       {
         id: 'accessibilityMode',
         icon: 'airplay',
         color: '#32c759',
-        label: 'Accessibility Mode',
+        label: t('Accessibility Mode'),
         type: 'toggle',
       },
       { icon: 'music', color: '#fd2d54', label: 'Sounds', type: 'link' },
@@ -67,7 +71,7 @@ const SECTIONS = [
     ],
   },
   {
-    header: 'Help',
+    header: t('help'),
     icon: 'help-circle',
     items: [
       { icon: 'save', color: '#8c8d91', label: 'Report Bug', type: 'link' },
@@ -75,7 +79,7 @@ const SECTIONS = [
     ],
   },
   {
-    header: 'Content',
+    header: t('content'),
     icon: 'align-center',
     items: [
       { icon: 'save', color: '#32c759', label: 'Saved', type: 'link' },
@@ -90,6 +94,7 @@ const PROFILE_PICTURE =
   'https://scontent.fsof1-2.fna.fbcdn.net/v/t1.6435-9/167948801_105755308284836_2213881515557944955_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=2cPteDZsVp8AX8y0L9K&_nc_ht=scontent.fsof1-2.fna&oh=00_AfCWhRZv0FQIoNB1Hdo24iqfAiYGuPmplk7NP831bCvhKw&oe=64CC83C3';
 
 const SettingsScreen = ({ route }) => {
+  const { t } = useTranslation(); // Use the t function for translations
   const navigation = useNavigation();
 
   const [selectedLanguage, setSelectedLanguage] = useState('English');
@@ -117,8 +122,10 @@ const SettingsScreen = ({ route }) => {
   };
 
   const handleLanguageSelection = (language) => {
+
     // Update selectedLanguage state based on user selection
     setSelectedLanguage(language);
+    console.log('Selected language:', selectedLanguage);
     setForm({ ...form, Language: language }); // Update the form state with the selected language
     hideLanguageModal();
   };
@@ -178,7 +185,7 @@ const SettingsScreen = ({ route }) => {
             style={sectionStyle}
             key={header}
           >
-            <Text style={styles.sectionHeader}>{header}</Text>
+            <Text style={styles.sectionHeader}>{t(header)}</Text>
 
             {items.map(({ id, label, type, icon, color }) => (
               <TouchableOpacity
@@ -186,16 +193,14 @@ const SettingsScreen = ({ route }) => {
                 onPress={() => {
                   if (type === 'language') {
                     LanguagesSelectionScreenFunction();
-                    // Update the selectedLanguage state based on user selection
                   } else {
-                    // Handle other types (toggle, link) as before
                   }
                 }}>
                 <View style={styles.row}>
                   <View style={[styles.rowIcon, { backgroundColor: color }]}>
                     <Icon name={icon} color="#fff" size={18} />
                   </View>
-                  <Text style={styles.rowLabel}>{label}</Text>
+                  <Text style={styles.rowLabel}>{t(label)}</Text>
 
                   <View style={{ flex: 1 }} />
 
@@ -245,6 +250,27 @@ const SettingsScreen = ({ route }) => {
     </ScrollView>
   );
 };
+
+i18n
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .init({
+    interpolation: { escapeValue: false }, // React already does escaping
+    lng: 'en', // language to use
+    resources: {
+      en: {
+        translation: require('../Settings/Languages/locales/en.json'),
+      },
+      de: {
+        translation: require('../Settings/Languages/locales/de.json'),
+      },
+      fr: {
+        translation: require('../Settings/Languages/locales/fr.json'),
+      },
+      it: {
+        translation: require('../Settings/Languages/locales/it.json'),
+      },
+    },
+  });
 
 const styles = StyleSheet.create({
   container: {
