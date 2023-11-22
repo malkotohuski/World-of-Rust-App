@@ -17,7 +17,6 @@ import LanguageSelectionScreen from './Languages/LanguagesSelectionScreen';
 import { useTranslation, initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import { t } from 'i18next';
-import en from './Languages/locales/en.json'
 
 
 const SECTIONS = [

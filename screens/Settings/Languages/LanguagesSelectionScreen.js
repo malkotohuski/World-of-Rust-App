@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
+import { useTranslation } from 'react-i18next';
 
 const LanguageSelectionScreen = ({ navigation, route }) => {
+    const { t, i18n } = useTranslation();
     // Look up the function based on the passed identifier
     const onSelectLanguageId = route.params.onSelectLanguageId;
 
@@ -22,11 +24,13 @@ const LanguageSelectionScreen = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Select Language</Text>
+            <Text style={styles.title}>{t('Select Language')}</Text>
             <SwitchSelector
                 options={languages}
                 initial={0}
-                onPress={(value) => onSelectLanguage(value)}
+                onPress={(value) => {
+                    onSelectLanguage(value)
+                }}
                 buttonColor="#007AFF"
                 textStyle={styles.switchTextStyle}
                 selectedTextStyle={styles.selectedTextStyle}
