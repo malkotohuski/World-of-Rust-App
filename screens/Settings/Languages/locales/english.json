@@ -1,4 +1,5 @@
-{
+{ 
+  "translation":{
     "language": "Language",
     "darkMode": "Dark Mode",
     "wifi": "Use Wi-Fi",
@@ -16,4 +17,5 @@
     "preferences": "Preferences",
     "help": "Help",
     "content": "Content"
+  }
   }

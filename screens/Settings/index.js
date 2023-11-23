@@ -28,7 +28,7 @@ const SECTIONS = [
         id: 'language',
         icon: 'map',
         color: '#fe9488',
-        label: t('language'),
+        label: t('Language'),
         type: 'language'
       },
       {
@@ -257,16 +257,16 @@ i18n
     lng: 'en', // language to use
     resources: {
       en: {
-        translation: require('../Settings/Languages/locales/en.json'),
+        translation: require('../Settings/Languages/locales/english.json'),
       },
       de: {
-        translation: require('../Settings/Languages/locales/de.json'),
+        translation: require('../Settings/Languages/locales/german.json'),
       },
       fr: {
-        translation: require('../Settings/Languages/locales/fr.json'),
+        translation: require('../Settings/Languages/locales/french.json'),
       },
       it: {
-        translation: require('../Settings/Languages/locales/it.json'),
+        translation: require('../Settings/Languages/locales/italian.json'),
       },
     },
   });
