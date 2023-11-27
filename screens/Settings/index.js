@@ -14,7 +14,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import LanguageSelectionScreen from './Languages/LanguagesSelectionScreen';
-import { useTranslation, initReactI18next } from 'react-i18next';
+import { useTranslation, initReactI18next, Trans } from 'react-i18next';
 import i18n from 'i18next';
 import { t } from 'i18next';
 
@@ -184,6 +184,7 @@ const SettingsScreen = ({ route }) => {
             style={sectionStyle}
             key={header}
           >
+
             <Text style={styles.sectionHeader}>{t(header)}</Text>
 
             {items.map(({ id, label, type, icon, color }) => (
@@ -213,9 +214,11 @@ const SettingsScreen = ({ route }) => {
                   {type === 'link' && (
                     <Icon name="chevron-right" color="#0c0c0c" size={22} />
                   )}
+
                 </View>
               </TouchableOpacity>
             ))}
+
           </View>
         );
       })}
