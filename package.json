@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^6.3.17",
     "firebase": "^9.23.0",
     "i18next": "^23.7.6",
+    "i18next-browser-languagedetector": "^7.2.0",
     "intl-pluralrules": "^2.0.1",
     "react": "18.2.0",
     "react-i18next": "^13.5.0",
